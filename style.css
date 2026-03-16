@@ -8,6 +8,10 @@ h1{
 color:#333;
 }
 
+.form{
+margin-bottom:20px;
+}
+
 input,select,button{
 padding:8px;
 margin:5px;
@@ -24,10 +28,19 @@ padding:10px;
 border:1px solid #ddd;
 }
 
+button{
+cursor:pointer;
+}
+
 .entrada{
 color:green;
 }
 
 .gasto{
 color:red;
+}
+
+#saldo{
+font-size:24px;
+font-weight:bold;
 }
