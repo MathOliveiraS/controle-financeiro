@@ -1,1 +1,81 @@
 # controle-financeiro
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+<title>Controle Financeiro</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<h1>Controle Financeiro</h1>
+
+<input type="text" id="pesquisa" placeholder="Pesquisar..." onkeyup="pesquisar()">
+
+<div class="form">
+
+<input type="number" id="valor" placeholder="Valor">
+
+<select id="tipo">
+<option value="entrada">Entrada</option>
+<option value="gasto">Gasto</option>
+</select>
+
+<select id="categoria">
+
+<option>Alimentação</option>
+<option>Transporte</option>
+<option>Casa</option>
+<option>Lazer</option>
+<option>Outros</option>
+
+</select>
+
+<input type="number" id="parcelas" placeholder="Parcelas" value="1">
+
+<button onclick="adicionar()">Adicionar</button>
+
+</div>
+
+<h2>Saldo</h2>
+
+<div id="saldo">R$ 0</div>
+
+<h2>Previsão do mês</h2>
+
+<div id="previsao"></div>
+
+<h2>Registros</h2>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Data</th>
+<th>Tipo</th>
+<th>Categoria</th>
+<th>Valor</th>
+<th>Ação</th>
+</tr>
+
+</thead>
+
+<tbody id="lista"></tbody>
+
+</table>
+
+<h2>Gastos por categoria</h2>
+
+<canvas id="grafico"></canvas>
+
+<script src="app.js"></script>
+
+</body>
+</html>
