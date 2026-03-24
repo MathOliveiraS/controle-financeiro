@@ -1,8 +1,14 @@
-import { serverTimestamp } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { db } from "./firebase.js";
-import { collection, addDoc, getDocs, deleteDoc, doc } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { 
+collection, 
+addDoc, 
+getDocs, 
+deleteDoc, 
+doc,
+query,
+orderBy,
+serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 // 🔹 ADICIONAR
 async function adicionar(){
@@ -16,13 +22,11 @@ alert("Digite um valor");
 return;
 }
 
-console.log("clicou adicionar"); // 🔥 TESTE
-
 await addDoc(collection(db, "registros"), {
 valor: parseFloat(valor),
 tipo: tipo,
 categoria: categoria,
-data: new Date().toLocaleString(),
+data: new Date().toLocaleString("pt-BR"),
 timestamp: serverTimestamp()
 });
 
@@ -31,7 +35,7 @@ document.getElementById("valor").value = "";
 listar();
 }
 
-// 🔹 LISTAR
+// 🔹 LISTAR (ORDENADO POR HORÁRIO)
 async function listar(){
 
 let lista = document.getElementById("lista");
@@ -39,9 +43,7 @@ lista.innerHTML = "";
 
 let saldo = 0;
 
-import { query, orderBy } 
-from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
+// 🔥 ORDENAÇÃO CORRETA
 const q = query(
 collection(db, "registros"),
 orderBy("timestamp", "desc")
@@ -81,10 +83,10 @@ await deleteDoc(doc(db, "registros", id));
 listar();
 }
 
-// 🔹 LIBERAR GLOBAL (ESSENCIAL)
+// 🔹 INICIAR
+listar();
+
+// 🔥 ESSENCIAL (resolve seu erro)
 window.adicionar = adicionar;
 window.listar = listar;
 window.remover = remover;
-
-// 🔹 INICIAR
-listar();
