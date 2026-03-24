@@ -2,6 +2,7 @@ import { db } from "./firebase.js";
 import { collection, addDoc, getDocs, deleteDoc, doc } 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+// 🔹 ADICIONAR
 async function adicionar(){
 
 let valor = document.getElementById("valor").value;
@@ -20,12 +21,12 @@ categoria: categoria,
 data: new Date().toLocaleString()
 });
 
-listar();
-
 document.getElementById("valor").value = "";
 
+listar();
 }
 
+// 🔹 LISTAR
 async function listar(){
 
 let lista = document.getElementById("lista");
@@ -50,7 +51,7 @@ lista.innerHTML += `
 <td>${dados.data}</td>
 <td class="${dados.tipo}">${dados.tipo}</td>
 <td>${dados.categoria}</td>
-<td>R$ ${dados.valor}</td>
+<td>R$ ${dados.valor.toFixed(2)}</td>
 <td><button onclick="remover('${item.id}')">Excluir</button></td>
 </tr>
 `;
@@ -61,6 +62,7 @@ document.getElementById("saldo").innerText = "R$ " + saldo.toFixed(2);
 
 }
 
+// 🔹 REMOVER
 async function remover(id){
 
 await deleteDoc(doc(db, "registros", id));
@@ -69,7 +71,12 @@ listar();
 
 }
 
-listar();
+// 🔹 BOTÕES
+document.getElementById("btnAdicionar").addEventListener("click", adicionar);
+document.getElementById("btnAtualizar").addEventListener("click", listar);
 
-window.adicionar = adicionar;
+// 🔹 LIBERAR EXCLUIR
 window.remover = remover;
+
+// 🔹 INICIAR
+listar();
