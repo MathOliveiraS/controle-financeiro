@@ -51,7 +51,7 @@ saldo -= dados.valor;
 lista.innerHTML += `
 <tr>
 <td>${dados.data}</td>
-<td>${dados.tipo}</td>
+<td class="${dados.tipo}">${dados.tipo.toUpperCase()}</td>
 <td>${dados.categoria}</td>
 <td>R$ ${dados.valor.toFixed(2)}</td>
 <td><button onclick="remover('${item.id}')">Excluir</button></td>
