@@ -2,8 +2,6 @@ import { db } from "./firebase.js";
 import { collection, addDoc, getDocs, deleteDoc, doc } 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-
 // 🔹 ADICIONAR
 async function adicionar(){
 
@@ -11,10 +9,12 @@ let valor = document.getElementById("valor").value;
 let tipo = document.getElementById("tipo").value;
 let categoria = document.getElementById("categoria").value;
 
-if(valor === ""){
+if(!valor){
 alert("Digite um valor");
 return;
 }
+
+console.log("clicou adicionar"); // 🔥 TESTE
 
 await addDoc(collection(db, "registros"), {
 valor: parseFloat(valor),
@@ -51,7 +51,7 @@ saldo -= dados.valor;
 lista.innerHTML += `
 <tr>
 <td>${dados.data}</td>
-<td class="${dados.tipo}">${dados.tipo}</td>
+<td>${dados.tipo}</td>
 <td>${dados.categoria}</td>
 <td>R$ ${dados.valor.toFixed(2)}</td>
 <td><button onclick="remover('${item.id}')">Excluir</button></td>
@@ -70,14 +70,10 @@ await deleteDoc(doc(db, "registros", id));
 listar();
 }
 
-// 🔹 BOTÕES (AGORA FUNCIONA)
-document.getElementById("btnAdicionar").addEventListener("click", adicionar);
-document.getElementById("btnAtualizar").addEventListener("click", listar);
-
-// 🔹 LIBERAR EXCLUIR
+// 🔹 LIBERAR GLOBAL (ESSENCIAL)
+window.adicionar = adicionar;
+window.listar = listar;
 window.remover = remover;
 
 // 🔹 INICIAR
 listar();
-
-});
