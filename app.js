@@ -36,7 +36,15 @@ lista.innerHTML = "";
 
 let saldo = 0;
 
-const querySnapshot = await getDocs(collection(db, "registros"));
+import { query, orderBy } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+const q = query(
+collection(db, "registros"),
+orderBy("timestamp", "desc")
+);
+
+const querySnapshot = await getDocs(q);
 
 querySnapshot.forEach((item)=>{
 
