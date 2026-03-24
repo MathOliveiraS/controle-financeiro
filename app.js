@@ -1,65 +1,57 @@
-let dados = JSON.parse(localStorage.getItem("dadosFinanceiros")) || [];
+import { db } from "./firebase.js";
+import { collection, addDoc, getDocs, deleteDoc, doc } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-function salvar(){
-localStorage.setItem("dadosFinanceiros",JSON.stringify(dados));
-}
-
-function adicionar(){
+async function adicionar(){
 
 let valor = document.getElementById("valor").value;
 let tipo = document.getElementById("tipo").value;
 let categoria = document.getElementById("categoria").value;
 
-if(valor == ""){
+if(valor === ""){
 alert("Digite um valor");
 return;
 }
 
-let registro = {
+await addDoc(collection(db, "registros"), {
 valor: parseFloat(valor),
 tipo: tipo,
 categoria: categoria,
 data: new Date().toLocaleString()
-};
+});
 
-dados.push(registro);
-
-salvar();
 listar();
 
-document.getElementById("valor").value="";
+document.getElementById("valor").value = "";
+
 }
 
-function listar(){
+async function listar(){
 
 let lista = document.getElementById("lista");
-lista.innerHTML="";
+lista.innerHTML = "";
 
 let saldo = 0;
 
-dados.forEach((item,index)=>{
+const querySnapshot = await getDocs(collection(db, "registros"));
 
-if(item.tipo=="entrada"){
-saldo += item.valor;
+querySnapshot.forEach((item)=>{
+
+let dados = item.data();
+
+if(dados.tipo === "entrada"){
+saldo += dados.valor;
 }else{
-saldo -= item.valor;
+saldo -= dados.valor;
 }
 
 lista.innerHTML += `
 <tr>
-
-<td>${item.data}</td>
-
-<td class="${item.tipo}">${item.tipo}</td>
-
-<td>${item.categoria}</td>
-
-<td>R$ ${item.valor}</td>
-
-<td>
-<button onclick="excluir(${index})">Excluir</button>
-</td>
-
+<td>${dados.data}</td>
+<td class="${dados.tipo}">${dados.tipo}</td>
+<td>${dados.categoria}</td>
+<td>R$ ${dados.valor}</td>
+<td><button onclick="remover('${item.id}')">Excluir</button></td>
 </tr>
 `;
 
@@ -67,58 +59,13 @@ lista.innerHTML += `
 
 document.getElementById("saldo").innerText = "R$ " + saldo.toFixed(2);
 
-grafico();
-
 }
 
-function excluir(index){
+async function remover(id){
 
-dados.splice(index,1);
+await deleteDoc(doc(db, "registros", id));
 
-salvar();
 listar();
-
-}
-
-let chart;
-
-function grafico(){
-
-let categorias = {};
-
-dados.forEach(item=>{
-
-if(item.tipo=="gasto"){
-
-if(!categorias[item.categoria]){
-categorias[item.categoria] = 0;
-}
-
-categorias[item.categoria] += item.valor;
-
-}
-
-});
-
-let labels = Object.keys(categorias);
-let valores = Object.values(categorias);
-
-if(chart){
-chart.destroy();
-}
-
-chart = new Chart(document.getElementById("grafico"),{
-
-type:"pie",
-
-data:{
-labels:labels,
-datasets:[{
-data:valores
-}]
-}
-
-});
 
 }
 
