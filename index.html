@@ -1,1 +1,84 @@
-<!DOCTYPE html> <html lang="pt-BR"> <head> <meta charset="UTF-8"> <title>Controle Financeiro</title> <link rel="stylesheet" href="style.css"> <link rel="manifest" href="manifest.json"> <meta name="apple-mobile-web-app-capable" content="yes"> </head> <body> <h1>Controle Financeiro</h1> <div> <input type="number" id="valor" placeholder="Valor"> <select id="tipo"> <option value="entrada">Entrada</option> <option value="gasto">Gasto</option> </select> <select id="categoria"> <option>Salário</option> <option>RendaExtra</option> <option>Investimentos</option> <option>Aluguel</option> <option>Mercado</option> <option>Garagem</option> <option>Combustível</option> <option>Alime.Besteira</option> <option>Internet</option> <option>Transporte</option> <option>Luz</option> <option>Água</option> <option>Restaurante</option> <option>Lazer</option> <option>Apartamento</option> <option>NovaCasa</option> <option>Outros</option> <option>Assinaturas</option> <option>Farmácia</option> <option>Academia</option> <option>Viagem</option> <option>Roupas</option> </select> <button onclick="adicionar()">Adicionar</button> </div> <h2>Saldo</h2> <div id="saldo">0</div> <h2>Registros</h2> <table> <thead> <tr> <th>Data</th> <th>Tipo</th> <th>Categoria</th> <th>Valor</th> <th>Ação</th> </tr> </thead> <tbody id="lista"></tbody> </table> <script type="module" src="app.js"></script> </body> </html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+<title>Controle Financeiro</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+</head>
+
+<body>
+
+<h1>Controle Financeiro</h1>
+
+<div>
+
+<input type="number" id="valor" placeholder="Valor">
+
+<select id="tipo">
+<option value="entrada">Entrada</option>
+<option value="gasto">Gasto</option>
+</select>
+
+<select id="categoria">
+
+<option value="Salário">Salário</option>
+<option value="Renda Extra">Renda Extra</option>
+<option value="Investimentos">Investimentos</option>
+<option value="Aluguel">Aluguel</option>
+<option value="Mercado">Mercado</option>
+<option value="Garagem">Garagem</option>
+<option value="Combustível">Combustível</option>
+<option value="Alimentação / Besteira">Alimentação / Besteira</option>
+<option value="Internet">Internet</option>
+<option value="Transporte">Transporte</option>
+<option value="Luz">Luz</option>
+<option value="Água">Água</option>
+<option value="Restaurante">Restaurante</option>
+<option value="Lazer">Lazer</option>
+<option value="Apartamento">Apartamento</option>
+<option value="Nova Casa">Nova Casa</option>
+<option value="Assinaturas">Assinaturas</option>
+<option value="Farmácia">Farmácia</option>
+<option value="Academia">Academia</option>
+<option value="Viagem">Viagem</option>
+<option value="Roupas">Roupas</option>
+<option value="Outros">Outros</option>
+
+</select>
+
+<button id="btnAdicionar">Adicionar</button>
+<button id="btnAtualizar">Atualizar</button>
+
+</div>
+
+<h2>Saldo</h2>
+<div id="saldo">0</div>
+
+<h2>Registros</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Data</th>
+<th>Tipo</th>
+<th>Categoria</th>
+<th>Valor</th>
+<th>Ação</th>
+</tr>
+</thead>
+
+<tbody id="lista"></tbody>
+
+</table>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>
