@@ -23,7 +23,7 @@ valor: parseFloat(valor),
 tipo: tipo,
 categoria: categoria,
 data: new Date().toLocaleString(),
-timestamp: Date.now()
+timestamp: serverTimestamp()
 });
 
 document.getElementById("valor").value = "";
