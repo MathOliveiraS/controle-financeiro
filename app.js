@@ -70,7 +70,6 @@ listar();
 }
 
 listar();
-listar();
 
 window.adicionar = adicionar;
 window.remover = remover;
