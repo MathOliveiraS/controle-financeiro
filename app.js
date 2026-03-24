@@ -20,7 +20,8 @@ await addDoc(collection(db, "registros"), {
 valor: parseFloat(valor),
 tipo: tipo,
 categoria: categoria,
-data: new Date().toLocaleString()
+data: new Date().toLocaleString(),
+timestamp: Date.now()
 });
 
 document.getElementById("valor").value = "";
