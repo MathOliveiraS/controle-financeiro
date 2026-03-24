@@ -2,6 +2,8 @@ import { db } from "./firebase.js";
 import { collection, addDoc, getDocs, deleteDoc, doc } 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+document.addEventListener("DOMContentLoaded", () => {
+
 // 🔹 ADICIONAR
 async function adicionar(){
 
@@ -64,14 +66,11 @@ document.getElementById("saldo").innerText = "R$ " + saldo.toFixed(2);
 
 // 🔹 REMOVER
 async function remover(id){
-
 await deleteDoc(doc(db, "registros", id));
-
 listar();
-
 }
 
-// 🔹 BOTÕES
+// 🔹 BOTÕES (AGORA FUNCIONA)
 document.getElementById("btnAdicionar").addEventListener("click", adicionar);
 document.getElementById("btnAtualizar").addEventListener("click", listar);
 
@@ -80,3 +79,5 @@ window.remover = remover;
 
 // 🔹 INICIAR
 listar();
+
+});
